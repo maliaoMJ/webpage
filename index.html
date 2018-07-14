@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <!--忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <!--[if lt IE 9]> 
+        <script src="lib/html5shiv/html5shiv.min.js"></script> 
+        <script src="lib/respond/respond.min.js"></script> 
+    <![endif]-->
+    <title>用户中心</title>
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/icon.css">
+    <link rel="stylesheet" href="./style/index.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="javascript:void(0);" class="switch_role">
+            <span>切换为卖家</span>
+        </a>
+        <div class="user_icon">
+            <img src="./static/images/user_icon.png" alt="用户图像">
+        </div>
+        <div class="nickname" title="用户昵称">
+            <span title="用户昵称">13213832373</span>
+        </div>
+    </header>
+    <div class="contaniner">
+        <img class="warn_icon" src="./static/images/warn.png" alt="未认证">
+        <p class="authentication_title">未认证</p>
+        <a href="javascript:void(0);" class="authentication_button">去认证</a>
+        <span class="authentication_tips">认证通过后即可开启智商城之旅</span>
+        <div class="conact_button">
+            <img class="conact_img" src="./static/images/conact.png" alt="联系我们">
+            <span class="text">联系小智君</span>
+            <i class="icon-arrow_right"></i>
+        </div>
+    </div>
+    <footer class="footer scale-1px-top">
+        <a class="item" href="javascript:void(0);">
+            <i class="icon icon-home"></i>
+            <p class="icon_title">首页</p>
+        </a>
+        <a class="item" href="javascript:void(0);">
+            <i class="icon icon-trucks"></i>
+            <p class="icon_title">进货</p>
+        </a>
+        <a class="item" href="javascript:void(0);">
+            <i class="icon icon-menu"></i>
+            <p class="icon_title">订单</p>
+        </a>
+        <a class="item" href="javascript:void(0);">
+            <i class="icon icon-users icon_active"></i>
+            <p class="icon_title icon_active">我的</p>
+        </a>
+    </footer>
+</body>
+
+</html>

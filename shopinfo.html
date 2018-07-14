@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <!--忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <!--[if lt IE 9]> 
+            <script src="lib/html5shiv/html5shiv.min.js"></script> 
+            <script src="lib/respond/respond.min.js"></script> 
+    <![endif]-->
+    <title>完善店铺信息</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/icon.css">
+    <link rel="stylesheet" href="./style/shop.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="title_box">
+            <i class="icon-arrow_left"></i>
+            <h4>完善店铺信息</h4>
+        </div>
+        <div class="user_avatar_box">
+            <img class="user_avatar" src="./static/images/portrait.png" id="user_avatar">
+            <input type="file" class="hidden_block" id="uploadImg" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg">
+        </div>
+    </header>
+    <div class="white_block"></div>
+    <div class="gray_block"></div>
+    <!-- top shop info -->
+    <div class="container shopinfo">
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/store.png" alt="店铺">
+                <span class='text'>店铺名称</span>
+            </div>
+            <input class="input_block " type="text" placeholder="请输入您的小智店名称" id="shopName" required>
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/business.png" alt="主营业务">
+                <span class='text'>主营业务</span>
+            </div>
+            <input class="input_block " type="text" placeholder="请精简的描述您的主营业务" id="shopBusiness" required>
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/touch.png" alt="联系方式">
+                <span class='text'>联系方式</span>
+            </div>
+            <input class="input_block " type="text" placeholder="输入客服手机，方便买家联系您" id="contact" required>
+        </div>
+    </div>
+    <div class="gray_block"></div>
+    <!-- location detail info -->
+    <div class="container address">
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/location.png" alt="所在区域">
+                <span class='text'>所在区域</span>
+            </div>
+            <input class="input_block button font_black " required type="text" id='cityPicker' readonly placeholder="请选择商店所在的城市">
+            <i class="icon-arrow_right"></i>
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/Address.png" alt="详细地址">
+                <span class='text'>详细地址</span>
+            </div>
+            <input class="input_block " type="text" placeholder="请填写店铺详细地址" id="adress" required>
+        </div>
+    </div>
+    <p class="protocolTips">点击提交代表您同意
+        <strong class="protocol">《智商城用户入住协议》</strong>
+    </p>
+    <div class="finish_button">完成</div>
+</body>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+<script defer type="text/javascript" src="./js/util.js"></script>
+<script defer type="text/javascript">
+    $(document).ready(function () {
+        // 城市选择功能
+        $("#cityPicker").cityPicker({
+            title: ''
+        })
+        //上传图片以及预览功能
+        $("#uploadImg").on('click', function (e) {
+            console.log(e.target.files)
+        })
+        // 实时预览图片
+        $("#uploadImg").on('change', function () {
+            let oFReader = new FileReader();
+            let file = document.getElementById('uploadImg').files[0];
+            oFReader.readAsDataURL(file);
+            oFReader.onloadend = function (oFRevent) {
+                const src = oFRevent.target.result;
+                //更换预览图片
+                $('#user_avatar').attr('src', src)
+            }
+        });
+        $("#user_avatar").on('click', function () {
+            $("#uploadImg").trigger('click')
+        })
+        // 提交填写信息
+        $(".finish_button").eq(0).on('click', function () {
+            // 获取表单信息
+            const shopName = getTrimStr($("#shopName").val())
+            const shopBusiness = getTrimStr($("#shopBusiness").val())
+            const contact = getTrimStr($("#contact").val())
+            const cityPicker = $("#cityPicker").val()
+            const adress = getTrimStr($("#adress").val())
+            const { isPhoneNumber } = isPhoneNumberValidate(contact)
+            //简单验证表单信息
+
+            if (shopName && shopBusiness && isPhoneNumber && adress && isPhoneNumber) {
+                // 向后台发起AJAx请求
+                console.log({
+                    shopName,
+                    shopBusiness,
+                    contact,
+                    cityPicker,
+                    adress
+                })
+                $.post(
+                    'ajax/address',
+                    { shopName, shopBusiness, contact, cityPicker, adress },
+                    function (data, status) {
+                        // 通过状态判断是否提交数据成功
+                        // 提交成功后，跳转对应的页面
+                        window.location.href = 'operate success apge address'
+                    })
+
+            } else {
+                $.toptip('信息填写不合法', 'error');
+            }
+        })
+    })
+</script>
+
+</html>

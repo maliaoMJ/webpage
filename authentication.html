@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <!--忽略页面中的数字识别为电话，忽略email识别 -->
+    <!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+    <!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+    <!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <!--[if lt IE 9]> 
+            <script src="lib/html5shiv/html5shiv.min.js"></script> 
+            <script src="lib/respond/respond.min.js"></script> 
+    <![endif]-->
+    <title>用户认证</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="./style/reset.css">
+    <link rel="stylesheet" href="./style/icon.css">
+    <link rel="stylesheet" href="./style/auth.css">
+</head>
+
+<body>
+    <header class="header">
+        <i class="icon-arrow_left"></i>
+        <h5 class="auth_title">卖家实名认证</h5>
+    </header>
+    <div class="container">
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/name.png" alt="姓名">
+                <span class='text'>您的姓名</span>
+            </div>
+            <input class="input_block " type="text" placeholder="请输入您身份证上的姓名" id="userName">
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/ID.png" alt="您的身份证号">
+                <span class='text'>您的身份证号</span>
+            </div>
+            <input class="input_block " type="text" placeholder="请输入您身的身份证号" id="userCardIDNumber">
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/IDcard1.png" alt="身份证照片(正)">
+                <span class='text'>身份证照片(正)</span>
+            </div>
+            <div class="input_block button" id="IDcard1Button">请上传本人身份证个人信息页</div>
+            <input class="hidden_block" type="file" style="opacity: 0;" id="IDcard1" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+            />
+            <img src="./static/images/question.png" alt="?" class="question_img">
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/IDcard2.png" alt="身份证照片(反)">
+                <span class='text'>身份证照片(反)</span>
+            </div>
+            <div class="input_block button" id="IDcard2Button">请上传本人身份证有效日期页</div>
+            <input class="hidden_block" type="file" style="opacity: 0;" id="IDcard2" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+            />
+            <img src="./static/images/question.png" alt="?" class="question_img">
+        </div>
+        <div class="input_item">
+            <div class="label_box">
+                <img src="./static/images/photograph.png" alt="正面露肩照">
+                <span class='text'>正面露肩照</span>
+            </div>
+            <div class="input_block button" id="photographButton">请上传本人手持身份证露肩照</div>
+            <input class="hidden_block" type="file" style="opacity: 0;" id="photograph" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+            />
+            <img src="./static/images/question.png" alt="?" class="question_img">
+        </div>
+    </div>
+    <div class="next_button" id="nextButton">下一步</div>
+</body>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+<script defer type="text/javascript" src="./js/util.js"></script>
+<script defer type="text/javascript">
+    function popUp(selecter) {
+        //弹出一个actionsheet
+        console.log()
+        $.actions({
+            actions: [{
+                text: "拍照",
+                onClick: function () {
+                    if (!selecter) return false
+                    selecter.trigger('click')
+                }
+            }, {
+                text: "从手机相册选择",
+                onClick: function () {
+                    if (!selecter) return false
+                    selecter.trigger('click')
+                }
+            }]
+        });
+
+    }
+    // main主函数
+    $(function () {
+        $('#photographButton').on('click', function () { popUp($('#photograph')) })
+        $('#IDcard2Button').on('click', function () { popUp($('#IDcard2')) })
+        $('#IDcard1Button').on('click', function () { popUp($('#IDcard1')) })
+        // 显示提交的文件名
+        $('#photograph').on('change', function (e) {
+            const fileName = e.target.files[0].name || '暂未选择图片'
+            $('#photographButton').html(fileName)
+        })
+        $('#IDcard2').on('change', function (e) {
+            const fileName = e.target.files[0].name || '暂未选择图片'
+            $('#IDcard2Button').html(fileName)
+        })
+        $('#IDcard1').on('change', function (e) {
+            const fileName = e.target.files[0].name || '暂未选择图片'
+            $('#IDcard1Button').html(fileName)
+        })
+        // 提交资料
+        $('#nextButton').on('click', function () {
+            // 提交前校验提交数据
+            const userName = getTrimStr($('#userName').val())
+            const userCardIDNumber = getTrimStr($('#userCardIDNumber').val())
+            //判断是否选择图片
+            const IDcard1 = document.getElementById('IDcard1').files[0];
+            const IDcard2 = document.getElementById('IDcard2').files[0];
+            const photograph = document.getElementById('photograph').files[0];
+            if (userName && isCardID(userCardIDNumber) && IDcard1 && IDcard2 && photograph) {
+                //处理图片数据 模拟form表单数据
+                let formData = new FormData();
+                formData.append('userName', userName);
+                formData.append('userCardIDNumber', userCardIDNumber);
+                formData.append('IDcard1', IDcard1);
+                formData.append('IDcard2', IDcard2);
+                formData.append('photograph', photograph);
+                // 向后台发起Ajax请求
+                $.ajax({
+                    url: "......",
+                    type: "post",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    mimeType: "multipart/form-data",
+                    success: function (data) {
+                        //ToDo success 
+                        window.location.href = '.....'
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+            } else {
+                $.toptip('信息填写不合法', 'error');
+            }
+        })
+        $('.question_img').on('click', function () {
+            $.toast("提示信息", function () {
+                //do something
+            });
+        })
+    })
+</script>
+
+</html>
